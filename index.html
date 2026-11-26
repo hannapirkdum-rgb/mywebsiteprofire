@@ -1,12 +1,1635 @@
-<!DOCTYPE html>
-<html lang="en">
+!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chelsea FC Thailand | Pride of London - เว็บไซต์อย่างเป็นทางการสำหรับแฟนบอลสิงห์บลูส์</title>
+    <!-- Google Fonts: Prompt & Inter for crisp Thai and English typography -->
+    <link rel="preconnect" href="https:/</fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        chelsea: {
+                            blue: '#034694',
+                            navy: '#001489',
+                            dark: '#000B49',
+                            gold: '#DBA111',
+                            goldLight: '#F3C64F',
+                            red: '#EE242C',
+                            light: '#F4F7FA'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        display: ['Inter', 'Prompt', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom CSS Variables & Utility Enhancements */
+        :root {
+            --chelsea-blue: #034694;
+            --chelsea-navy: #001489;
+            --chelsea-dark: #000B49;
+            --chelsea-gold: #DBA111;
+            --bg-light: #F4F7FA;
+        }
+
+        body {
+            font-family: 'Prompt', 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: #1E293B;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Navigation */
+        .glass-nav {
+            background: rgba(0, 20, 137, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-nav.scrolled {
+            background: rgba(0, 11, 73, 0.96);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Hero Section Gradient & Pattern */
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0, 11, 73, 0.92) 0%, rgba(3, 70, 148, 0.82) 55%, rgba(0, 20, 137, 0.95) 100%),
+                        url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        /* Subtle Pitch Pattern Overlay */
+        .pitch-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000B49;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #034694;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #DBA111;
+        }
+
+        /* Card Hover Micro-interactions */
+        .player-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .player-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px -10px rgba(3, 70, 148, 0.25);
+        }
+        .player-card:hover .player-number {
+            color: #DBA111;
+            transform: scale(1.1);
+        }
+
+        .trophy-card {
+            transition: all 0.3s ease;
+        }
+        .trophy-card:hover {
+            transform: translateY(-6px);
+            border-color: #DBA111;
+        }
+
+        /* Active Nav Link Indicator */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #DBA111;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Modal Transitions */
+        .modal-backdrop {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-backdrop.open .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Timeline Connector */
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 3px;
+                background: linear-gradient(to bottom, #034694, #DBA111, #034694);
+                transform: translateX(-50%);
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>ฮันนะ</h1>
-     <a href=""></a>
+<body class="antialiased selection:bg-chelsea-gold selection:text-chelsea-dark">
+
+    <!-- ==========================================
+         STICKY GLASSMORPHISM NAVIGATION BAR
+    =========================================== -->
+    <header id="navbar" class="glass-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Club Crest & Brand -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-white p-1 shadow-lg flex items-center justify-center border-2 border-chelsea-gold group-hover:rotate-6 transition-transform">
+                        <!-- Custom SVG Chelsea-inspired Lion Crest -->
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="46" fill="#034694" stroke="#DBA111" stroke-width="4"/>
+                            <circle cx="50" cy="50" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="3 2"/>
+                            <text x="50" y="16" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle" font-family="Inter">CHELSEA</text>
+                            <text x="50" y="91" font-size="8" font-weight="800" fill="#DBA111" text-anchor="middle" font-family="Inter">1905</text>
+                            <!-- Stylized Lion & Staff Silhouette -->
+                            <path d="M43 32 C48 27, 57 29, 59 35 C62 41, 58 47, 61 54 C63 60, 58 68, 51 69 L45 69 L47 58 L41 64 L38 60 L44 50 C39 46, 39 37, 43 32 Z" fill="#FFFFFF"/>
+                            <line x1="63" y1="26" x2="55" y2="73" stroke="#DBA111" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="63" cy="26" r="3" fill="#EE242C"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="block text-white font-display font-extrabold text-xl tracking-wider leading-none">CHELSEA FC</span>
+                        <span class="block text-chelsea-gold text-xs font-medium tracking-widest mt-1">PRIDE OF LONDON</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-7">
+                    <a href="#home" class="nav-link active text-white hover:text-chelsea-gold text-sm font-medium transition-colors">หน้าแรก</a>
+                    <a href="#history" class="nav-link text-white/90 hover:text-chelsea-gold text-sm font-medium transition-colors">ประวัติสโมสร</a>
+                    <a href="#squad" class="nav-link text-white/90 hover:text-chelsea-gold text-sm font-medium transition-colors">ขุมกำลังนักเตะ</a>
+                    <a href="#trophies" class="nav-link text-white/90 hover:text-chelsea-gold text-sm font-medium transition-colors">เกียรติประวัติ</a>
+                    <a href="#fixtures" class="nav-link text-white/90 hover:text-chelsea-gold text-sm font-medium transition-colors">ตารางแข่งขัน</a>
+                    <a href="#stadium" class="nav-link text-white/90 hover:text-chelsea-gold text-sm font-medium transition-colors">สแตมฟอร์ด บริดจ์</a>
+                </nav>
+
+                <!-- CTA Button & Mobile Menu Toggle -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openFanClubModal()" class="hidden sm:inline-flex items-center gap-2 bg-chelsea-gold hover:bg-chelsea-goldLight text-chelsea-dark font-bold text-xs uppercase tracking-wider px-4 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all cursor-pointer">
+                        <i class="fa-solid fa-crown"></i>
+                        <span>สมัครสมาชิกแฟนคลับ</span>
+                    </button>
+
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobile-menu-btn" aria-label="เปิดเมนูนำทาง" class="lg:hidden text-white hover:text-chelsea-gold p-2 rounded-lg focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-chelsea-dark/98 border-t border-white/10 px-4 pt-3 pb-6 space-y-2">
+            <a href="#home" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-white font-medium hover:bg-chelsea-blue transition">หน้าแรก (Home)</a>
+            <a href="#history" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-white/90 font-medium hover:bg-chelsea-blue transition">ประวัติสโมสร (Club History)</a>
+            <a href="#squad" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-white/90 font-medium hover:bg-chelsea-blue transition">ขุมกำลังนักเตะ (First Team Squad)</a>
+            <a href="#trophies" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-white/90 font-medium hover:bg-chelsea-blue transition">เกียรติประวัติ (Trophies & Honours)</a>
+            <a href="#fixtures" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-white/90 font-medium hover:bg-chelsea-blue transition">ตารางแข่งขัน (Fixtures & Results)</a>
+            <a href="#stadium" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-white/90 font-medium hover:bg-chelsea-blue transition">สแตมฟอร์ด บริดจ์ (Stamford Bridge)</a>
+            <div class="pt-2">
+                <button onclick="openFanClubModal()" class="w-full bg-chelsea-gold text-chelsea-dark font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-crown"></i>
+                    <span>เข้าร่วม True Blue Fan Club</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         1. HERO SECTION (หน้าแรก)
+    =========================================== -->
+    <section id="home" class="hero-bg pitch-pattern relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+        <!-- Decorative Glow Orbs -->
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-chelsea-blue/40 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-chelsea-gold/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Hero Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-chelsea-gold text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6">
+                        <span class="w-2 h-2 rounded-full bg-chelsea-gold animate-ping"></span>
+                        <span>EST. 1905 • STAMFORD BRIDGE, LONDON</span>
+                    </div>
+
+                    <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-tight mb-4">
+                        PRIDE OF <span class="text-transparent bg-clip-text bg-gradient-to-r from-chelsea-gold via-chelsea-goldLight to-white">LONDON</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-blue-100 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-8">
+                        ยินดีต้อนรับสู่ศูนย์รวมจิตวิญญาณแห่ง <strong class="text-white font-semibold">"สิงโตน้ำเงินคราม" เชลซี เอฟซี</strong> สโมสรฟุตบอลระดับตำนานแห่งกรุงลอนดอน ผู้พิชิตทุกถ้วยรางวัลสำคัญในยุโรปและระดับโลก
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+                        <a href="#squad" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-chelsea-gold hover:bg-chelsea-goldLight text-chelsea-dark font-bold text-base shadow-xl shadow-chelsea-gold/20 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2.5">
+                            <i class="fa-solid fa-users"></i>
+                            <span>สำรวจขุมกำลังนักเตะ</span>
+                        </a>
+                        <a href="#fixtures" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md font-semibold text-base hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2.5">
+                            <i class="fa-regular fa-calendar-check text-chelsea-gold"></i>
+                            <span>โปรแกรมการแข่งขัน</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Club Highlights Stats -->
+                    <div class="grid grid-cols-3 gap-4 sm:gap-6 pt-8 border-t border-white/15">
+                        <div>
+                            <div class="font-display font-black text-2xl sm:text-4xl text-chelsea-gold">34+</div>
+                            <div class="text-xs sm:text-sm text-blue-200 mt-1">ถ้วยรางวัลเมเจอร์</div>
+                        </div>
+                        <div>
+                            <div class="font-display font-black text-2xl sm:text-4xl text-white">2x</div>
+                            <div class="text-xs sm:text-sm text-blue-200 mt-1">แชมป์ยุโรป (UCL)</div>
+                        </div>
+                        <div>
+                            <div class="font-display font-black text-2xl sm:text-4xl text-white">1905</div>
+                            <div class="text-xs sm:text-sm text-blue-200 mt-1">ปีที่ก่อตั้งสโมสร</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Interactive Card (Next Match Highlight) -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl text-white relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-chelsea-gold text-chelsea-dark text-xs font-extrabold px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
+                            Next Big Match
+                        </div>
+
+                        <div class="text-xs text-blue-200 uppercase tracking-widest font-semibold mb-1">Premier League • Matchweek 13</div>
+                        <div class="text-sm text-white/80 flex items-center gap-2 mb-6">
+                            <i class="fa-solid fa-location-dot text-chelsea-gold"></i>
+                            <span>Stamford Bridge, London</span>
+                        </div>
+
+                        <!-- Teams VS Display -->
+                        <div class="flex items-center justify-between gap-4 my-6">
+                            <!-- Home Team -->
+                            <div class="text-center flex-1">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-chelsea-blue border-2 border-chelsea-gold flex items-center justify-center shadow-lg mb-3">
+                                    <span class="font-display font-black text-2xl text-white">CFC</span>
+                                </div>
+                                <div class="font-bold text-base sm:text-lg">Chelsea</div>
+                                <div class="text-xs text-chelsea-gold">เจ้าบ้าน</div>
+                            </div>
+
+                            <!-- VS Badge -->
+                            <div class="text-center">
+                                <span class="inline-block px-3 py-1 rounded-lg bg-white/15 font-display font-black text-sm text-chelsea-gold">VS</span>
+                                <div class="text-xs text-blue-200 mt-2">23:30 น.</div>
+                            </div>
+
+                            <!-- Away Team -->
+                            <div class="text-center flex-1">
+                                <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-red-700 border-2 border-white/40 flex items-center justify-center shadow-lg mb-3">
+                                    <span class="font-display font-black text-2xl text-white">ARS</span>
+                                </div>
+                                <div class="font-bold text-base sm:text-lg">Arsenal</div>
+                                <div class="text-xs text-blue-200">ทีมเยือน</div>
+                            </div>
+                        </div>
+
+                        <!-- Live Countdown Timer -->
+                        <div class="bg-chelsea-dark/70 rounded-2xl p-4 border border-white/10 mt-6">
+                            <div class="text-center text-xs text-blue-200 uppercase tracking-wider mb-3">นับถอยหลังสู่เวลาคิกออฟ</div>
+                            <div class="grid grid-cols-4 gap-2 text-center" id="hero-countdown">
+                                <div class="bg-white/5 rounded-xl py-2">
+                                    <span id="cd-days" class="block font-display font-extrabold text-xl sm:text-2xl text-chelsea-gold">02</span>
+                                    <span class="text-[11px] text-blue-200">วัน</span>
+                                </div>
+                                <div class="bg-white/5 rounded-xl py-2">
+                                    <span id="cd-hours" class="block font-display font-extrabold text-xl sm:text-2xl text-white">14</span>
+                                    <span class="text-[11px] text-blue-200">ชั่วโมง</span>
+                                </div>
+                                <div class="bg-white/5 rounded-xl py-2">
+                                    <span id="cd-mins" class="block font-display font-extrabold text-xl sm:text-2xl text-white">35</span>
+                                    <span class="text-[11px] text-blue-200">นาที</span>
+                                </div>
+                                <div class="bg-white/5 rounded-xl py-2">
+                                    <span id="cd-secs" class="block font-display font-extrabold text-xl sm:text-2xl text-chelsea-gold">48</span>
+                                    <span class="text-[11px] text-blue-200">วินาที</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#fixtures" class="mt-5 w-full py-3 rounded-xl bg-chelsea-blue hover:bg-chelsea-navy border border-white/20 text-center text-sm font-semibold transition flex items-center justify-center gap-2">
+                            <span>ดูโปรแกรมการแข่งขันทั้งหมด</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         2. CLUB HISTORY (ประวัติสโมสร)
+    =========================================== -->
+    <section id="history" class="py-20 sm:py-28 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block text-chelsea-blue font-bold text-xs uppercase tracking-widest bg-blue-50 px-4 py-1.5 rounded-full mb-3">
+                    OUR HERITAGE & LEGACY
+                </span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-chelsea-dark mb-4">
+                    เส้นทางประวัติศาสตร์ <span class="text-chelsea-blue">สิงโตน้ำเงินคราม</span>
+                </h2>
+                <p class="text-slate-600 text-base sm:text-lg">
+                    จากจุดเริ่มต้นที่ผับ เดอะ ไรซิ่ง ซัน ในปี 1905 สู่การก้าวขึ้นมาเป็นมหาอำนาจลูกหนังระดับโลกที่กวาดแชมป์ครบทุกรายการสำคัญ
+                </p>
+            </div>
+
+            <!-- Interactive Vertical Timeline -->
+            <div class="relative timeline-line space-y-12">
+                <!-- Milestone 1: 1905 -->
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+                    <div class="md:text-right md:pr-12">
+                        <span class="inline-block px-3 py-1 rounded-lg bg-chelsea-blue text-white font-display font-bold text-sm mb-2">10 มีนาคม 1905</span>
+                        <h3 class="text-2xl font-bold text-chelsea-dark mb-2">กำเนิดสโมสรฟุตบอลเชลซี</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            กัส เมียร์ส (Gus Mears) นักธุรกิจชาวอังกฤษ ได้ซื้อสนามกีฬาแอธเลติก สแตมฟอร์ด บริดจ์ และก่อตั้งสโมสรฟุตบอลเชลซีขึ้นอย่างเป็นทางการ ณ ผับ "The Rising Sun" ตรงข้ามทางเข้าสนาม พร้อมเลือกใช้สีน้ำเงิน Royal Blue เป็นสีประจำสโมสร
+                        </p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-chelsea-gold border-4 border-white shadow-lg items-center justify-center text-chelsea-dark font-bold z-10">
+                        <i class="fa-solid fa-flag"></i>
+                    </div>
+                    <div class="md:pl-12">
+                        <div class="bg-chelsea-light rounded-2xl p-6 border border-slate-200/80 shadow-sm">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-xl bg-chelsea-blue text-white flex items-center justify-center font-display font-black text-xl shrink-0">1905</div>
+                                <div>
+                                    <div class="font-bold text-chelsea-dark">The Pensioners</div>
+                                    <div class="text-sm text-slate-500">ฉายาแรกเริ่มของสโมสรที่ได้รับแรงบันดาลใจจากทหารผ่านศึกโรงพยาบาลรอยัล เชลซี</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 2: 1955 -->
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+                    <div class="order-2 md:order-1 md:pr-12">
+                        <div class="bg-chelsea-light rounded-2xl p-6 border border-slate-200/80 shadow-sm">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-xl bg-chelsea-navy text-chelsea-gold flex items-center justify-center font-display font-black text-xl shrink-0">1955</div>
+                                <div>
+                                    <div class="font-bold text-chelsea-dark">ยุคของ เท็ด เดรค (Ted Drake)</div>
+                                    <div class="text-sm text-slate-500">เปลี่ยนตราสโมสรเป็นรูปสิงโตถือคทา และสร้างระบบเยาวชนจนคว้าแชมป์ลีกสูงสุดสมัยแรก</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-chelsea-blue border-4 border-white shadow-lg items-center justify-center text-white font-bold z-10">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="order-1 md:order-2 md:pl-12">
+                        <span class="inline-block px-3 py-1 rounded-lg bg-chelsea-gold text-chelsea-dark font-display font-bold text-sm mb-2">ฤดูกาล 1954–55</span>
+                        <h3 class="text-2xl font-bold text-chelsea-dark mb-2">แชมป์ลีกสูงสุดสมัยแรกในประวัติศาสตร์</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            ภายใต้การคุมทีมของ เท็ด เดรค เชลซีปฏิวัติสโมสรครั้งใหญ่และผงาดคว้าแชมป์ดิวิชั่น 1 (พรีเมียร์ลีกในปัจจุบัน) ได้สำเร็จในวาระครบรอบ 50 ปีของสโมสรพอดี
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 3: 2004-2012 -->
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+                    <div class="md:text-right md:pr-12">
+                        <span class="inline-block px-3 py-1 rounded-lg bg-chelsea-blue text-white font-display font-bold text-sm mb-2">2004 – 2012</span>
+                        <h3 class="text-2xl font-bold text-chelsea-dark mb-2">ยุคทองและค่ำคืนมหัศจรรย์ที่มิวนิก</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            การมาถึงของ โชเซ่ มูรินโญ่ พาเชลซีคว้าแชมป์พรีเมียร์ลีก 2 สมัยซ้อน (2004/05, 2005/06) ด้วยสถิติเสียประตูน้อยที่สุดตลอดกาล (15 ประตู) ก่อนจะก้าวขึ้นสู่จุดสูงสุดในวันที่ 19 พฤษภาคม 2012 ด้วยการดวลจุดโทษชนะ บาเยิร์น มิวนิก คว้าแชมป์ <strong class="text-chelsea-blue">UEFA Champions League สมัยแรก</strong> เป็นทีมแรกของกรุงลอนดอน
+                        </p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-chelsea-gold border-4 border-white shadow-lg items-center justify-center text-chelsea-dark font-bold z-10">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="md:pl-12">
+                        <div class="bg-gradient-to-br from-chelsea-blue to-chelsea-navy text-white rounded-2xl p-6 shadow-lg">
+                            <div class="text-chelsea-gold text-xs font-bold uppercase tracking-wider mb-1">19 MAY 2012 • MUNICH</div>
+                            <div class="font-bold text-lg mb-2">"Drogba... He's Done It!"</div>
+                            <p class="text-sm text-blue-100">ดีดิเยร์ ดร็อกบา โขกตีเสมอและยิงจุดโทษตัดสิน พาเชลซีครองบัลลังก์เจ้ายุโรปอย่างยิ่งใหญ่</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 4: 2021-Present -->
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+                    <div class="order-2 md:order-1 md:pr-12">
+                        <div class="bg-chelsea-light rounded-2xl p-6 border border-slate-200/80 shadow-sm">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-xl bg-chelsea-gold text-chelsea-dark flex items-center justify-center font-display font-black text-xl shrink-0">2021</div>
+                                <div>
+                                    <div class="font-bold text-chelsea-dark">แชมป์สโมสรโลก (FIFA Club World Cup)</div>
+                                    <div class="text-sm text-slate-500">พิชิตแชมป์ยุโรปสมัยที่ 2 ที่ปอร์โต และคว้าแชมป์สโมสรโลกที่อาบูดาบี</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-chelsea-blue border-4 border-white shadow-lg items-center justify-center text-white font-bold z-10">
+                        <i class="fa-solid fa-earth-americas"></i>
+                    </div>
+                    <div class="order-1 md:order-2 md:pl-12">
+                        <span class="inline-block px-3 py-1 rounded-lg bg-chelsea-gold text-chelsea-dark font-display font-bold text-sm mb-2">2021 – ปัจจุบัน</span>
+                        <h3 class="text-2xl font-bold text-chelsea-dark mb-2">แชมป์ยุโรปสมัยที่ 2 และแชมป์โลก</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            เชลซีคว้าแชมป์ UEFA Champions League สมัยที่ 2 ในปี 2021 ตามด้วย UEFA Super Cup และ FIFA Club World Cup ทำให้เชลซีกลายเป็นสโมสรที่กวาดแชมป์เมเจอร์ครบทุกใบในระดับสโมสรฟุตบอล และกำลังสร้างยุคใหม่ด้วยขุมกำลังคนรุ่นใหม่ระดับท็อปของโลก
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         3. FIRST TEAM SQUAD (ขุมกำลังนักเตะ)
+    =========================================== -->
+    <section id="squad" class="py-20 sm:py-28 bg-chelsea-light relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="inline-block text-chelsea-blue font-bold text-xs uppercase tracking-widest bg-blue-100 px-4 py-1.5 rounded-full mb-3">
+                        FIRST TEAM SQUAD
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-chelsea-dark">
+                        ขุมกำลัง <span class="text-chelsea-blue">ทีมชุดใหญ่</span>
+                    </h2>
+                    <p class="text-slate-600 mt-2 max-w-xl">
+                        คลิกเลือกกรองตามตำแหน่ง หรือคลิกที่การ์ดนักเตะเพื่อดูข้อมูลสถิติและประวัติเชิงลึก
+                    </p>
+                </div>
+
+                <!-- Position Filter Tabs -->
+                <div id="squad-filters" class="flex flex-wrap gap-2">
+                    <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-xl font-semibold text-sm bg-chelsea-blue text-white shadow-md transition-all cursor-pointer">
+                        ทั้งหมด (All)
+                    </button>
+                    <button data-filter="GK" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm bg-white text-slate-700 hover:bg-blue-50 border border-slate-200 transition-all cursor-pointer">
+                        ผู้รักษาประตู (GK)
+                    </button>
+                    <button data-filter="DEF" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm bg-white text-slate-700 hover:bg-blue-50 border border-slate-200 transition-all cursor-pointer">
+                        กองหลัง (DEF)
+                    </button>
+                    <button data-filter="MID" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm bg-white text-slate-700 hover:bg-blue-50 border border-slate-200 transition-all cursor-pointer">
+                        กองกลาง (MID)
+                    </button>
+                    <button data-filter="FWD" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm bg-white text-slate-700 hover:bg-blue-50 border border-slate-200 transition-all cursor-pointer">
+                        กองหน้า (FWD)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Squad Grid Container (Rendered via JS) -->
+            <div id="squad-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Player cards will be dynamically injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         4. TROPHIES & HONOURS (เกียรติประวัติและถ้วยรางวัล)
+    =========================================== -->
+    <section id="trophies" class="py-20 sm:py-28 bg-chelsea-dark text-white relative overflow-hidden">
+        <div class="pitch-pattern absolute inset-0 opacity-40 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block text-chelsea-gold font-bold text-xs uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full mb-3">
+                    CABINET OF CHAMPIONS
+                </span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+                    เกียรติประวัติและ <span class="text-chelsea-gold">ถ้วยรางวัล</span>
+                </h2>
+                <p class="text-blue-200 text-base sm:text-lg">
+                    ความสำเร็จระดับตำนานที่จารึกชื่อ เชลซี เอฟซี ในฐานะสโมสรที่คว้าแชมป์เมเจอร์ครบทุกรายการทั้งในอังกฤษ ยุโรป และระดับโลก
+                </p>
+            </div>
+
+            <!-- Trophies Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Trophy 1: Premier League -->
+                <div class="trophy-card bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-chelsea-gold to-yellow-600 text-chelsea-dark flex items-center justify-center text-2xl shadow-lg">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <span class="font-display font-black text-5xl text-chelsea-gold">6</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Premier League / First Division</h3>
+                        <p class="text-xs text-chelsea-gold uppercase tracking-wider font-semibold mb-4">แชมป์ลีกสูงสุดของอังกฤษ</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 text-sm text-blue-200">
+                        <span class="font-semibold text-white">ปีที่ได้แชมป์:</span> 1954–55, 2004–05, 2005–06, 2009–10, 2014–15, 2016–17
+                    </div>
+                </div>
+
+                <!-- Trophy 2: UEFA Champions League -->
+                <div class="trophy-card bg-gradient-to-br from-chelsea-blue/60 to-chelsea-navy/80 backdrop-blur-md border border-chelsea-gold/40 rounded-3xl p-7 flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-white text-chelsea-blue flex items-center justify-center text-2xl shadow-lg">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="font-display font-black text-5xl text-chelsea-gold">2</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">UEFA Champions League</h3>
+                        <p class="text-xs text-chelsea-gold uppercase tracking-wider font-semibold mb-4">แชมป์สโมสรยุโรปถ้วยใหญ่</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/15 text-sm text-blue-100">
+                        <span class="font-semibold text-white">ปีที่ได้แชมป์:</span> 2011–12 (มิวนิก), 2020–21 (ปอร์โต)
+                    </div>
+                </div>
+
+                <!-- Trophy 3: FA Cup -->
+                <div class="trophy-card bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-chelsea-gold to-yellow-600 text-chelsea-dark flex items-center justify-center text-2xl shadow-lg">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <span class="font-display font-black text-5xl text-chelsea-gold">8</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">The Emirates FA Cup</h3>
+                        <p class="text-xs text-chelsea-gold uppercase tracking-wider font-semibold mb-4">ถ้วยฟุตบอลที่เก่าแก่ที่สุดในโลก</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 text-sm text-blue-200">
+                        <span class="font-semibold text-white">ปีที่ได้แชมป์:</span> 1970, 1997, 2000, 2007, 2009, 2010, 2012, 2018
+                    </div>
+                </div>
+
+                <!-- Trophy 4: UEFA Europa League -->
+                <div class="trophy-card bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-chelsea-blue text-chelsea-gold border border-chelsea-gold/30 flex items-center justify-center text-2xl">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <span class="font-display font-black text-5xl text-white">2</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">UEFA Europa League</h3>
+                        <p class="text-xs text-chelsea-gold uppercase tracking-wider font-semibold mb-4">แชมป์ยูฟ่า ยูโรปา ลีก</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 text-sm text-blue-200">
+                        <span class="font-semibold text-white">ปีที่ได้แชมป์:</span> 2012–13 (อัมสเตอร์ดัม), 2018–19 (บากู)
+                    </div>
+                </div>
+
+                <!-- Trophy 5: EFL League Cup -->
+                <div class="trophy-card bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-chelsea-blue text-chelsea-gold border border-chelsea-gold/30 flex items-center justify-center text-2xl">
+                                <i class="fa-solid fa-medal"></i>
+                            </div>
+                            <span class="font-display font-black text-5xl text-white">5</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">EFL League Cup</h3>
+                        <p class="text-xs text-chelsea-gold uppercase tracking-wider font-semibold mb-4">แชมป์ลีกคัพอังกฤษ</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 text-sm text-blue-200">
+                        <span class="font-semibold text-white">ปีที่ได้แชมป์:</span> 1965, 1998, 2005, 2007, 2015
+                    </div>
+                </div>
+
+                <!-- Trophy 6: FIFA Club World Cup & Super Cup -->
+                <div class="trophy-card bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-chelsea-gold to-yellow-600 text-chelsea-dark flex items-center justify-center text-2xl shadow-lg">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <span class="font-display font-black text-5xl text-chelsea-gold">3</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Club World Cup & Super Cup</h3>
+                        <p class="text-xs text-chelsea-gold uppercase tracking-wider font-semibold mb-4">แชมป์สโมสรโลก & ยูฟ่า ซูเปอร์คัพ</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 text-sm text-blue-200">
+                        <span class="font-semibold text-white">ความสำเร็จ:</span> FIFA Club World Cup (2021), UEFA Super Cup (1998, 2021)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         5. FIXTURES & RESULTS (ตารางการแข่งขันและผลการแข่งขัน)
+    =========================================== -->
+    <section id="fixtures" class="py-20 sm:py-28 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="inline-block text-chelsea-blue font-bold text-xs uppercase tracking-widest bg-blue-50 px-4 py-1.5 rounded-full mb-3">
+                    MATCH CENTER
+                </span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-chelsea-dark mb-4">
+                    ตารางแข่งขันและ <span class="text-chelsea-blue">ผลการแข่งขัน</span>
+                </h2>
+                <p class="text-slate-600">
+                    ติดตามโปรแกรมการแข่งขันนัดสำคัญที่กำลังจะมาถึงและสรุปผลการแข่งขันล่าสุดของทัพสิงห์บลูส์
+                </p>
+            </div>
+
+            <!-- Interactive Tab Switcher -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex bg-chelsea-light p-1.5 rounded-2xl border border-slate-200">
+                    <button id="tab-upcoming" onclick="switchMatchTab('upcoming')" class="px-6 py-3 rounded-xl font-bold text-sm bg-chelsea-blue text-white shadow-md transition-all cursor-pointer">
+                        <i class="fa-regular fa-calendar-days mr-2"></i>โปรแกรมถัดไป (Fixtures)
+                    </button>
+                    <button id="tab-results" onclick="switchMatchTab('results')" class="px-6 py-3 rounded-xl font-bold text-sm text-slate-600 hover:text-chelsea-blue transition-all cursor-pointer">
+                        <i class="fa-solid fa-square-poll-vertical mr-2"></i>ผลการแข่งขันล่าสุด (Results)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upcoming Fixtures List -->
+            <div id="panel-upcoming" class="space-y-4">
+                <!-- Match 1 -->
+                <div class="bg-chelsea-light hover:bg-blue-50/70 border border-slate-200 rounded-2xl p-5 sm:p-6 transition-all flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div class="bg-chelsea-blue text-white rounded-xl px-4 py-2.5 text-center shrink-0">
+                            <span class="block text-xs uppercase font-bold text-chelsea-gold">อา.</span>
+                            <span class="block font-display font-black text-xl">22 พ.ย.</span>
+                        </div>
+                        <div>
+                            <span class="inline-block text-xs font-bold text-chelsea-blue bg-blue-100 px-2.5 py-0.5 rounded-md mb-1">Premier League</span>
+                            <div class="text-sm text-slate-500"><i class="fa-solid fa-location-dot mr-1 text-chelsea-blue"></i> Stamford Bridge (เหย้า)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 sm:gap-8 w-full md:w-auto">
+                        <div class="flex items-center gap-3 font-bold text-chelsea-dark text-base sm:text-lg">
+                            <span>Chelsea</span>
+                            <span class="w-9 h-9 rounded-full bg-chelsea-blue text-white text-xs font-display font-black flex items-center justify-center">CFC</span>
+                        </div>
+                        <span class="px-3 py-1.5 rounded-lg bg-chelsea-dark text-chelsea-gold font-display font-bold text-sm">23:30 น.</span>
+                        <div class="flex items-center gap-3 font-bold text-slate-700 text-base sm:text-lg">
+                            <span class="w-9 h-9 rounded-full bg-red-600 text-white text-xs font-display font-black flex items-center justify-center">ARS</span>
+                            <span>Arsenal</span>
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-auto text-center md:text-right">
+                        <button onclick="openReminderToast('Chelsea vs Arsenal (22 พ.ย. 23:30 น.)')" class="w-full md:w-auto px-4 py-2 rounded-xl border border-chelsea-blue text-chelsea-blue hover:bg-chelsea-blue hover:text-white text-xs font-bold transition cursor-pointer">
+                            <i class="fa-regular fa-bell mr-1"></i> แจ้งเตือนแมตช์นี้
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Match 2 -->
+                <div class="bg-chelsea-light hover:bg-blue-50/70 border border-slate-200 rounded-2xl p-5 sm:p-6 transition-all flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div class="bg-chelsea-navy text-white rounded-xl px-4 py-2.5 text-center shrink-0">
+                            <span class="block text-xs uppercase font-bold text-chelsea-gold">พฤ.</span>
+                            <span class="block font-display font-black text-xl">26 พ.ย.</span>
+                        </div>
+                        <div>
+                            <span class="inline-block text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-0.5 rounded-md mb-1">UEFA Champions League</span>
+                            <div class="text-sm text-slate-500"><i class="fa-solid fa-plane mr-1 text-slate-400"></i> San Siro, Milan (เยือน)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 sm:gap-8 w-full md:w-auto">
+                        <div class="flex items-center gap-3 font-bold text-slate-700 text-base sm:text-lg">
+                            <span>AC Milan</span>
+                            <span class="w-9 h-9 rounded-full bg-neutral-900 text-red-500 text-xs font-display font-black flex items-center justify-center">ACM</span>
+                        </div>
+                        <span class="px-3 py-1.5 rounded-lg bg-chelsea-dark text-chelsea-gold font-display font-bold text-sm">03:00 น.</span>
+                        <div class="flex items-center gap-3 font-bold text-chelsea-dark text-base sm:text-lg">
+                            <span class="w-9 h-9 rounded-full bg-chelsea-blue text-white text-xs font-display font-black flex items-center justify-center">CFC</span>
+                            <span>Chelsea</span>
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-auto text-center md:text-right">
+                        <button onclick="openReminderToast('AC Milan vs Chelsea (26 พ.ย. 03:00 น.)')" class="w-full md:w-auto px-4 py-2 rounded-xl border border-chelsea-blue text-chelsea-blue hover:bg-chelsea-blue hover:text-white text-xs font-bold transition cursor-pointer">
+                            <i class="fa-regular fa-bell mr-1"></i> แจ้งเตือนแมตช์นี้
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Match 3 -->
+                <div class="bg-chelsea-light hover:bg-blue-50/70 border border-slate-200 rounded-2xl p-5 sm:p-6 transition-all flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div class="bg-chelsea-blue text-white rounded-xl px-4 py-2.5 text-center shrink-0">
+                            <span class="block text-xs uppercase font-bold text-chelsea-gold">อา.</span>
+                            <span class="block font-display font-black text-xl">29 พ.ย.</span>
+                        </div>
+                        <div>
+                            <span class="inline-block text-xs font-bold text-chelsea-blue bg-blue-100 px-2.5 py-0.5 rounded-md mb-1">Premier League</span>
+                            <div class="text-sm text-slate-500"><i class="fa-solid fa-location-dot mr-1 text-chelsea-blue"></i> Stamford Bridge (เหย้า)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 sm:gap-8 w-full md:w-auto">
+                        <div class="flex items-center gap-3 font-bold text-chelsea-dark text-base sm:text-lg">
+                            <span>Chelsea</span>
+                            <span class="w-9 h-9 rounded-full bg-chelsea-blue text-white text-xs font-display font-black flex items-center justify-center">CFC</span>
+                        </div>
+                        <span class="px-3 py-1.5 rounded-lg bg-chelsea-dark text-chelsea-gold font-display font-bold text-sm">21:00 น.</span>
+                        <div class="flex items-center gap-3 font-bold text-slate-700 text-base sm:text-lg">
+                            <span class="w-9 h-9 rounded-full bg-claret-800 bg-rose-900 text-sky-300 text-xs font-display font-black flex items-center justify-center">AVL</span>
+                            <span>Aston Villa</span>
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-auto text-center md:text-right">
+                        <button onclick="openReminderToast('Chelsea vs Aston Villa (29 พ.ย. 21:00 น.)')" class="w-full md:w-auto px-4 py-2 rounded-xl border border-chelsea-blue text-chelsea-blue hover:bg-chelsea-blue hover:text-white text-xs font-bold transition cursor-pointer">
+                            <i class="fa-regular fa-bell mr-1"></i> แจ้งเตือนแมตช์นี้
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Results List (Hidden by Default) -->
+            <div id="panel-results" class="hidden space-y-4">
+                <!-- Result 1 -->
+                <div class="bg-chelsea-light border border-slate-200 rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <span class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-display font-black flex items-center justify-center shrink-0">W</span>
+                        <div>
+                            <span class="text-xs font-bold text-chelsea-blue uppercase">Premier League • Full Time</span>
+                            <div class="text-sm text-slate-500">ผู้ทำประตู: Palmer 24', 67', Jackson 51'</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 sm:gap-8 w-full md:w-auto">
+                        <div class="flex items-center gap-3 font-bold text-chelsea-dark text-base sm:text-lg">
+                            <span>Chelsea</span>
+                            <span class="w-9 h-9 rounded-full bg-chelsea-blue text-white text-xs font-display font-black flex items-center justify-center">CFC</span>
+                        </div>
+                        <span class="px-4 py-1.5 rounded-lg bg-chelsea-blue text-white font-display font-black text-base tracking-wider">3 - 1</span>
+                        <div class="flex items-center gap-3 font-bold text-slate-700 text-base sm:text-lg">
+                            <span class="w-9 h-9 rounded-full bg-sky-600 text-white text-xs font-display font-black flex items-center justify-center">BHA</span>
+                            <span>Brighton</span>
+                        </div>
+                    </div>
+
+                    <div class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-lg">
+                        ชนะในบ้าน (3 แต้ม)
+                    </div>
+                </div>
+
+                <!-- Result 2 -->
+                <div class="bg-chelsea-light border border-slate-200 rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <span class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-display font-black flex items-center justify-center shrink-0">W</span>
+                        <div>
+                            <span class="text-xs font-bold text-indigo-700 uppercase">Champions League • Full Time</span>
+                            <div class="text-sm text-slate-500">ผู้ทำประตู: Neto 38', Enzo 79'</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 sm:gap-8 w-full md:w-auto">
+                        <div class="flex items-center gap-3 font-bold text-slate-700 text-base sm:text-lg">
+                            <span>Benfica</span>
+                            <span class="w-9 h-9 rounded-full bg-red-600 text-white text-xs font-display font-black flex items-center justify-center">SLB</span>
+                        </div>
+                        <span class="px-4 py-1.5 rounded-lg bg-chelsea-blue text-white font-display font-black text-base tracking-wider">0 - 2</span>
+                        <div class="flex items-center gap-3 font-bold text-chelsea-dark text-base sm:text-lg">
+                            <span class="w-9 h-9 rounded-full bg-chelsea-blue text-white text-xs font-display font-black flex items-center justify-center">CFC</span>
+                            <span>Chelsea</span>
+                        </div>
+                    </div>
+
+                    <div class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-lg">
+                        คลีนชีตเกมเยือน
+                    </div>
+                </div>
+
+                <!-- Result 3 -->
+                <div class="bg-chelsea-light border border-slate-200 rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <span class="w-10 h-10 rounded-xl bg-amber-500 text-white font-display font-black flex items-center justify-center shrink-0">D</span>
+                        <div>
+                            <span class="text-xs font-bold text-chelsea-blue uppercase">Premier League • Full Time</span>
+                            <div class="text-sm text-slate-500">ผู้ทำประตู: Caicedo 74'</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 sm:gap-8 w-full md:w-auto">
+                        <div class="flex items-center gap-3 font-bold text-slate-700 text-base sm:text-lg">
+                            <span>Man Utd</span>
+                            <span class="w-9 h-9 rounded-full bg-red-700 text-yellow-400 text-xs font-display font-black flex items-center justify-center">MUN</span>
+                        </div>
+                        <span class="px-4 py-1.5 rounded-lg bg-slate-700 text-white font-display font-black text-base tracking-wider">1 - 1</span>
+                        <div class="flex items-center gap-3 font-bold text-chelsea-dark text-base sm:text-lg">
+                            <span class="w-9 h-9 rounded-full bg-chelsea-blue text-white text-xs font-display font-black flex items-center justify-center">CFC</span>
+                            <span>Chelsea</span>
+                        </div>
+                    </div>
+
+                    <div class="text-xs font-semibold text-amber-800 bg-amber-100 px-3 py-1.5 rounded-lg">
+                        แบ่งแต้มเกมเยือน
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         6. STAMFORD BRIDGE (สนามสแตมฟอร์ด บริดจ์)
+    =========================================== -->
+    <section id="stadium" class="py-20 sm:py-28 bg-chelsea-light relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden">
+                <div class="grid lg:grid-cols-12">
+                    <!-- Stadium Visual Side -->
+                    <div class="lg:col-span-6 relative min-h-[340px] sm:min-h-[450px] bg-chelsea-dark">
+                        <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=1200&q=80"
+                             onerror="this.src='https://placehold.co/800x600/034694/FFFFFF?text=Stamford+Bridge+Stadium'"
+                             alt="สนามสแตมฟอร์ด บริดจ์"
+                             class="w-full h-full object-cover opacity-85">
+                        <div class="absolute inset-0 bg-gradient-to-t from-chelsea-dark via-chelsea-dark/30 to-transparent"></div>
+
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <span class="inline-block px-3 py-1 rounded-lg bg-chelsea-gold text-chelsea-dark font-bold text-xs uppercase tracking-wider mb-2">
+                                HOME OF THE BLUES
+                            </span>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold">Stamford Bridge</h3>
+                            <p class="text-sm text-blue-100 mt-1">Fulham Road, London SW6 1HS, United Kingdom</p>
+                        </div>
+                    </div>
+
+                    <!-- Stadium Info & Specs Side -->
+                    <div class="lg:col-span-6 p-8 sm:p-12 flex flex-col justify-between">
+                        <div>
+                            <span class="text-chelsea-blue font-bold text-xs uppercase tracking-widest">THE FORTRESS</span>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-chelsea-dark mt-1 mb-4">
+                                สนาม <span class="text-chelsea-blue">สแตมฟอร์ด บริดจ์</span>
+                            </h2>
+                            <p class="text-slate-600 leading-relaxed mb-6">
+                                "เดอะ บริดจ์" (The Bridge) คือบ้านอันศักดิ์สิทธิ์ของเชลซีมาตั้งแต่ปี 1905 ตั้งอยู่ใจกลางย่านฟูแล่ม กรุงลอนดอน ขึ้นชื่อเรื่องบรรยากาศการเชียร์ที่ใกล้ชิดติดขอบสนามและเสียงเพลง <em class="text-chelsea-blue font-medium">"Blue is the Colour"</em> ที่ดังกึกก้องทุกนัดที่ลงสนาม
+                            </p>
+
+                            <!-- Key Stadium Specs -->
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+                                <div class="bg-chelsea-light p-4 rounded-2xl border border-slate-200/60">
+                                    <div class="text-xs text-slate-500">ความจุสนาม</div>
+                                    <div class="font-display font-black text-xl text-chelsea-blue mt-1">40,341</div>
+                                    <div class="text-[11px] text-slate-400">ที่นั่ง</div>
+                                </div>
+                                <div class="bg-chelsea-light p-4 rounded-2xl border border-slate-200/60">
+                                    <div class="text-xs text-slate-500">เปิดใช้งาน</div>
+                                    <div class="font-display font-black text-xl text-chelsea-dark mt-1">1877</div>
+                                    <div class="text-[11px] text-slate-400">บ้านเชลซีตั้งแต่ 1905</div>
+                                </div>
+                                <div class="bg-chelsea-light p-4 rounded-2xl border border-slate-200/60 col-span-2 sm:col-span-1">
+                                    <div class="text-xs text-slate-500">ขนาดพื้นสนาม</div>
+                                    <div class="font-display font-black text-xl text-chelsea-dark mt-1">103 × 67</div>
+                                    <div class="text-[11px] text-slate-400">เมตร (หญ้าไฮบริด)</div>
+                                </div>
+                            </div>
+
+                            <!-- 4 Stands Highlight -->
+                            <div class="space-y-2.5 mb-8">
+                                <div class="text-sm font-bold text-chelsea-dark">4 อัฒจันทร์ระดับตำนาน:</div>
+                                <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm text-slate-600">
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-chelsea-blue"></i> <span>Matthew Harding Stand</span></div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-chelsea-blue"></i> <span>The Shed End</span></div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-chelsea-blue"></i> <span>East Stand</span></div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-chelsea-blue"></i> <span>West Stand</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stadium Tour CTA -->
+                        <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-100">
+                            <button onclick="openStadiumTourModal()" class="flex-1 bg-chelsea-blue hover:bg-chelsea-navy text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-ticket"></i>
+                                <span>ข้อมูลทัวร์สนาม & พิพิธภัณฑ์</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         7. FOOTER (ส่วนท้าย)
+    =========================================== -->
+    <footer class="bg-chelsea-dark text-white pt-16 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                <!-- Col 1: Brand Info -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-chelsea-blue border-2 border-chelsea-gold flex items-center justify-center font-display font-black text-sm">
+                            CFC
+                        </div>
+                        <span class="font-display font-extrabold text-xl tracking-wide">CHELSEA FC</span>
+                    </div>
+                    <p class="text-sm text-blue-200 leading-relaxed mb-6">
+                        สโมสรฟุตบอลเชลซี — ความภาคภูมิใจแห่งกรุงลอนดอน (Pride of London) ศูนย์รวมข้อมูล ข่าวสาร สถิติ และประวัติศาสตร์สำหรับแฟนบอลสิงห์บลูส์ชาวไทย
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="#home" aria-label="Facebook" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-chelsea-blue flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#home" aria-label="X Twitter" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-chelsea-blue flex items-center justify-center transition"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#home" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-chelsea-blue flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#home" aria-label="YouTube" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-chelsea-blue flex items-center justify-center transition"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-bold text-chelsea-gold uppercase tracking-wider text-sm mb-4">เมนูลัด (Quick Links)</h4>
+                    <ul class="space-y-2.5 text-sm text-blue-200">
+                        <li><a href="#home" class="hover:text-white transition">หน้าแรก (Home)</a></li>
+                        <li><a href="#history" class="hover:text-white transition">ประวัติศาสตร์สโมสร (History)</a></li>
+                        <li><a href="#squad" class="hover:text-white transition">ขุมกำลังนักเตะ (First Team)</a></li>
+                        <li><a href="#trophies" class="hover:text-white transition">ทำเนียบแชมป์ (Honours)</a></li>
+                        <li><a href="#fixtures" class="hover:text-white transition">โปรแกรมแข่งขัน (Fixtures)</a></li>
+                        <li><a href="#stadium" class="hover:text-white transition">สแตมฟอร์ด บริดจ์ (Stadium)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Club Information -->
+                <div>
+                    <h4 class="font-bold text-chelsea-gold uppercase tracking-wider text-sm mb-4">ข้อมูลสโมสร</h4>
+                    <ul class="space-y-3 text-sm text-blue-200">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot text-chelsea-gold mt-1"></i>
+                            <span>Stamford Bridge, Fulham Road, London SW6 1HS, UK</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-music text-chelsea-gold"></i>
+                            <span>เพลงประจำสโมสร: Blue is the Colour</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-palette text-chelsea-gold"></i>
+                            <span>สีประจำสโมสร: Royal Blue & White</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter -->
+                <div>
+                    <h4 class="font-bold text-chelsea-gold uppercase tracking-wider text-sm mb-4">รับข่าวสารสิงห์บลูส์</h4>
+                    <p class="text-sm text-blue-200 mb-4">สมัครรับข่าวสารอัปเดตก่อนใคร ส่งตรงถึงอีเมลของคุณ</p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="space-y-2.5">
+                        <input type="email" required placeholder="กรอกอีเมลของคุณ..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-300 text-sm focus:outline-none focus:border-chelsea-gold">
+                        <button type="submit" class="w-full bg-chelsea-gold hover:bg-chelsea-goldLight text-chelsea-dark font-bold py-3 rounded-xl text-sm transition cursor-pointer">
+                            ติดตามข่าวสาร (Subscribe)
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-300 gap-4">
+                <p>© 2026 Chelsea FC Fan Portal Thailand. ออกแบบและพัฒนาด้วยความภาคภูมิใจในสีน้ำเงินคราม</p>
+                <p class="text-chelsea-gold font-semibold tracking-wider">KEEP THE BLUE FLAG FLYING HIGH</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         MODALS & TOAST NOTIFICATIONS
+    =========================================== -->
+
+    <!-- 1. Player Detail Modal -->
+    <div id="player-modal" class="modal-backdrop fixed inset-0 z-50 bg-chelsea-dark/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeModalOnBackdrop(event, 'player-modal')">
+        <div class="modal-content bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200">
+            <!-- Modal Header Banner -->
+            <div class="bg-gradient-to-r from-chelsea-navy via-chelsea-blue to-chelsea-navy p-6 sm:p-8 text-white relative">
+                <button onclick="closeModal('player-modal')" aria-label="ปิดหน้าต่าง" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+
+                <div class="flex items-center gap-5">
+                    <div id="modal-player-number" class="w-20 h-20 rounded-2xl bg-chelsea-gold text-chelsea-dark font-display font-black text-4xl flex items-center justify-center shadow-lg shrink-0">
+                        20
+                    </div>
+                    <div>
+                        <span id="modal-player-pos" class="inline-block px-3 py-1 rounded-full bg-white/15 text-chelsea-gold text-xs font-bold uppercase tracking-wider mb-1">
+                            กองกลางตัวรุก
+                        </span>
+                        <h3 id="modal-player-name" class="text-2xl sm:text-3xl font-extrabold">Cole Palmer</h3>
+                        <p id="modal-player-nation" class="text-sm text-blue-200 mt-0.5">สัญชาติ: อังกฤษ (England)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 sm:p-8">
+                <!-- Key Stats Row -->
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-chelsea-light p-4 rounded-2xl text-center border border-slate-200/70">
+                        <div class="text-xs text-slate-500">ลงสนาม (นัด)</div>
+                        <div id="modal-stat-apps" class="font-display font-black text-2xl text-chelsea-dark mt-1">45</div>
+                    </div>
+                    <div class="bg-chelsea-light p-4 rounded-2xl text-center border border-slate-200/70">
+                        <div class="text-xs text-slate-500" id="modal-stat-2-label">ประตู (Goals)</div>
+                        <div id="modal-stat-2-val" class="font-display font-black text-2xl text-chelsea-blue mt-1">25</div>
+                    </div>
+                    <div class="bg-chelsea-light p-4 rounded-2xl text-center border border-slate-200/70">
+                        <div class="text-xs text-slate-500" id="modal-stat-3-label">แอสซิสต์ (Assists)</div>
+                        <div id="modal-stat-3-val" class="font-display font-black text-2xl text-chelsea-gold mt-1">15</div>
+                    </div>
+                </div>
+
+                <!-- Player Bio & Details -->
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-sm font-bold text-chelsea-dark uppercase tracking-wider mb-1">ข้อมูลส่วนตัวและสไตล์การเล่น</h4>
+                        <p id="modal-player-bio" class="text-slate-600 text-sm leading-relaxed">
+                            เพลย์เมกเกอร์พรสวรรค์สูง เจ้าของฉายา "Cold Palmer" โดดเด่นด้วยการจ่ายบอลทะลุช่องที่เฉียบคม การจบสกอร์ที่เยือกเย็น และความนิ่งในการสังหารจุดโทษ
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 pt-3 border-t border-slate-100 text-sm">
+                        <div>
+                            <span class="text-slate-400 block text-xs">อายุ / วันเกิด</span>
+                            <span id="modal-player-age" class="font-semibold text-chelsea-dark">24 ปี (6 พ.ค. 2002)</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block text-xs">ย้ายร่วมทีมเมื่อ</span>
+                            <span id="modal-player-joined" class="font-semibold text-chelsea-dark">กันยายน 2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="closeModal('player-modal')" class="px-6 py-2.5 rounded-xl bg-chelsea-blue hover:bg-chelsea-navy text-white font-semibold text-sm transition cursor-pointer">
+                        ปิดหน้าต่าง
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Stadium Tour Modal -->
+    <div id="stadium-modal" class="modal-backdrop fixed inset-0 z-50 bg-chelsea-dark/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeModalOnBackdrop(event, 'stadium-modal')">
+        <div class="modal-content bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl p-6 sm:p-8">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-chelsea-blue text-chelsea-gold flex items-center justify-center">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-chelsea-dark">Stamford Bridge Stadium Tour</h3>
+                </div>
+                <button onclick="closeModal('stadium-modal')" class="text-slate-400 hover:text-chelsea-dark p-2 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="py-5 space-y-4 text-sm text-slate-600">
+                <p>สัมผัสประสบการณ์เบื้องหลังสนามเหย้าของเชลซีแบบเอ็กซ์คลูซีฟ พร้อมเข้าชมพิพิธภัณฑ์สโมสรที่ใหญ่ที่สุดในลอนดอน:</p>
+                <ul class="space-y-2.5">
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-chelsea-blue"></i> <span>เข้าชมห้องแต่งตัวนักเตะทีมเหย้า (Home Dressing Room)</span></li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-chelsea-blue"></i> <span>เดินผ่านอุโมงค์นักเตะ (Players' Tunnel) สู่ขอบสนามหญ้าจริง</span></li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-chelsea-blue"></i> <span>ถ่ายภาพคู่กับถ้วย UEFA Champions League และ Premier League ของจริง</span></li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-chelsea-blue"></i> <span>เวลาเปิดทำการ: ทุกวัน 10:00 – 16:00 น. (ยกเว้นวันแข่งขัน)</span></li>
+                </ul>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex justify-end gap-3">
+                <button onclick="closeModal('stadium-modal')" class="px-5 py-2.5 rounded-xl bg-chelsea-blue text-white font-semibold text-sm hover:bg-chelsea-navy transition cursor-pointer">
+                    รับทราบข้อมูล
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Fan Club Registration Modal -->
+    <div id="fanclub-modal" class="modal-backdrop fixed inset-0 z-50 bg-chelsea-dark/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeModalOnBackdrop(event, 'fanclub-modal')">
+        <div class="modal-content bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl">
+            <div class="bg-chelsea-blue p-6 text-white relative">
+                <button onclick="closeModal('fanclub-modal')" class="absolute top-4 right-4 text-white/80 hover:text-white p-2 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+                <span class="text-chelsea-gold text-xs font-bold uppercase tracking-widest">OFFICIAL SUPPORTERS</span>
+                <h3 class="text-2xl font-extrabold mt-1">True Blue Thailand</h3>
+                <p class="text-xs text-blue-100 mt-1">ลงทะเบียนสมาชิกแฟนคลับเชลซี เพื่อรับสิทธิพิเศษและกิจกรรมเชียร์สด</p>
+            </div>
+            <form onsubmit="handleFanClubSubmit(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">ชื่อ-นามสกุล (Full Name)</label>
+                    <input type="text" required placeholder="เช่น สมชาย สิงห์บลูส์" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-chelsea-blue">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">อีเมล (Email)</label>
+                    <input type="email" required placeholder="blue@chelseafan.th" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-chelsea-blue">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">นักเตะคนโปรดของคุณ</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-chelsea-blue bg-white">
+                        <option>Cole Palmer (#20)</option>
+                        <option>Reece James (#24)</option>
+                        <option>Enzo Fernández (#8)</option>
+                        <option>Moisés Caicedo (#25)</option>
+                        <option>Didier Drogba (Legend)</option>
+                        <option>Frank Lampard (Legend)</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-chelsea-gold hover:bg-chelsea-goldLight text-chelsea-dark font-bold py-3 rounded-xl text-sm shadow-md transition cursor-pointer">
+                    ยืนยันการสมัครสมาชิก
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification (Replaces alert) -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-chelsea-dark text-white px-5 py-4 rounded-2xl shadow-2xl border border-chelsea-gold/40 flex items-center gap-3 max-w-sm">
+            <div class="w-8 h-8 rounded-full bg-chelsea-gold text-chelsea-dark flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-check font-bold"></i>
+            </div>
+            <p id="toast-message" class="text-sm font-medium"></p>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT APPLICATION LOGIC
+    =========================================== -->
+    <script>
+        // 1. First Team Squad Data
+        const squadData = [
+            {
+                id: 1,
+                number: 1,
+                name: "Robert Sánchez",
+                position: "GK",
+                posLabel: "ผู้รักษาประตู (Goalkeeper)",
+                nationality: "สเปน (Spain)",
+                age: "28 ปี",
+                joined: "สิงหาคม 2023",
+                apps: 42,
+                stat2Label: "คลีนชีต (Clean Sheets)",
+                stat2Val: 14,
+                stat3Label: "เซฟสำคัญ (Saves)",
+                stat3Val: 118,
+                bio: "ผู้รักษาประตูร่างสูงทีมชาติสเปน โดดเด่นในการรับลูกกลางอากาศ ปฏิกิริยาการเซฟระยะเผาขน และการเปิดบอลยาวเพื่อเริ่มเกมโต้กลับเร็ว"
+            },
+            {
+                id: 2,
+                number: 12,
+                name: "Filip Jörgensen",
+                position: "GK",
+                posLabel: "ผู้รักษาประตู (Goalkeeper)",
+                nationality: "เดนมาร์ก (Denmark)",
+                age: "24 ปี",
+                joined: "กรกฎาคม 2024",
+                apps: 24,
+                stat2Label: "คลีนชีต (Clean Sheets)",
+                stat2Val: 10,
+                stat3Label: "ความแม่นยำส่งบอล",
+                stat3Val: "89%",
+                bio: "นายทวารดาวรุ่งฝีมือดีที่มีจุดเด่นในการใช้เท้าเล่นบอลจากแดนหลังได้อย่างเยือกเย็น เหมาะกับฟุตบอลสมัยใหม่ที่เน้นการครองบอล"
+            },
+            {
+                id: 3,
+                number: 24,
+                name: "Reece James",
+                position: "DEF",
+                posLabel: "แบ็กขวา / กัปตันทีม (Captain)",
+                nationality: "อังกฤษ (England)",
+                age: "26 ปี",
+                joined: "อะคาเดมี่ Cobham",
+                apps: 168,
+                stat2Label: "ประตู (Goals)",
+                stat2Val: 12,
+                stat3Label: "แอสซิสต์ (Assists)",
+                stat3Val: 23,
+                bio: "กัปตันทีมผลผลิตจากศูนย์ฝึกค็อบแฮม ผู้มีพละกำลังแข็งแกร่ง เกมรับเหนียวแน่น และลูกเปิดจากด้านข้างที่แม่นยำระดับโลก รวมถึงการยิงฟรีคิกอันทรงพลัง"
+            },
+            {
+                id: 4,
+                number: 6,
+                name: "Levi Colwill",
+                position: "DEF",
+                posLabel: "เซ็นเตอร์แบ็ก (Center Back)",
+                nationality: "อังกฤษ (England)",
+                age: "23 ปี",
+                joined: "อะคาเดมี่ Cobham",
+                apps: 68,
+                stat2Label: "คลีนชีต (Clean Sheets)",
+                stat2Val: 19,
+                stat3Label: "จ่ายบอลสำเร็จ",
+                stat3Val: "92%",
+                bio: "ปราการหลังเท้าซ้ายแห่งอนาคตของเชลซีและทีมชาติอังกฤษ มีความนิ่งเกินวัย อ่านเกมขาด และวางบอลยาวจากแนวลึกได้อย่างแม่นยำ"
+            },
+            {
+                id: 5,
+                number: 3,
+                name: "Marc Cucurella",
+                position: "DEF",
+                posLabel: "แบ็กซ้าย (Left Back)",
+                nationality: "สเปน (Spain)",
+                age: "28 ปี",
+                joined: "สิงหาคม 2022",
+                apps: 84,
+                stat2Label: "เข้าปะทะสำเร็จ",
+                stat2Val: 165,
+                stat3Label: "แอสซิสต์ (Assists)",
+                stat3Val: 8,
+                bio: "แบ็กซ้ายจอมขยันแชมป์ยูโร 2024 ขึ้นชื่อเรื่องความทุ่มเทวิ่งไม่มีหมด กัดไม่ปล่อยในเกมรับ และขยับเข้ามาช่วยคุมจังหวะแดนกลาง (Inverted Fullback) ได้อย่างยอดเยี่ยม"
+            },
+            {
+                id: 6,
+                number: 29,
+                name: "Wesley Fofana",
+                position: "DEF",
+                posLabel: "เซ็นเตอร์แบ็ก (Center Back)",
+                nationality: "ฝรั่งเศส (France)",
+                age: "25 ปี",
+                joined: "สิงหาคม 2022",
+                apps: 46,
+                stat2Label: "สกัดบอลสำคัญ",
+                stat2Val: 94,
+                stat3Label: "ชนะดวลกลางอากาศ",
+                stat3Val: "74%",
+                bio: "เซ็นเตอร์แบ็กความเร็วสูงทีมชาติฝรั่งเศส แข็งแกร่งในการดวลตัวต่อตัว และสามารถดันไลน์เกมรับขึ้นสูงได้อย่างมั่นใจ"
+            },
+            {
+                id: 7,
+                number: 8,
+                name: "Enzo Fernández",
+                position: "MID",
+                posLabel: "กองกลางตัวคุมเกม (Central Midfielder)",
+                nationality: "อาร์เจนตินา (Argentina)",
+                age: "25 ปี",
+                joined: "มกราคม 2023",
+                apps: 92,
+                stat2Label: "ประตู (Goals)",
+                stat2Val: 11,
+                stat3Label: "แอสซิสต์ (Assists)",
+                stat3Val: 16,
+                bio: "มิดฟิลด์แชมป์โลกทีมชาติอาร์เจนตินา หัวใจสำคัญในการขับเคลื่อนเกมแดนกลาง โดดเด่นด้วยวิสัยทัศน์การจ่ายบอลเปลี่ยนแกนและการสอดขึ้นไปทำประตู"
+            },
+            {
+                id: 8,
+                number: 25,
+                name: "Moisés Caicedo",
+                position: "MID",
+                posLabel: "กองกลางตัวรับ (Defensive Midfielder)",
+                nationality: "เอกวาดอร์ (Ecuador)",
+                age: "24 ปี",
+                joined: "สิงหาคม 2023",
+                apps: 78,
+                stat2Label: "ตัดบอลสำเร็จ",
+                stat2Val: 184,
+                stat3Label: "แย่งบอลกลับมาครอง",
+                stat3Val: 310,
+                bio: "ห้องเครื่องจอมพลังแห่งแดนกลาง ผู้คอยตัดเกมรุกคู่แข่งและปกป้องแผงหลังได้อย่างแข็งแกร่ง พร้อมทักษะการเอาตัวรอดในพื้นที่แคบระดับสูง"
+            },
+            {
+                id: 9,
+                number: 20,
+                name: "Cole Palmer",
+                position: "MID",
+                posLabel: "กองกลางตัวรุก (Attacking Midfielder)",
+                nationality: "อังกฤษ (England)",
+                age: "24 ปี",
+                joined: "กันยายน 2023",
+                apps: 74,
+                stat2Label: "ประตู (Goals)",
+                stat2Val: 39,
+                stat3Label: "แอสซิสต์ (Assists)",
+                stat3Val: 24,
+                bio: "ซูเปอร์สตาร์หมายเลข 1 ของทีม เจ้าของฉายา 'Cold Palmer' สร้างสรรค์โอกาสทำประตูได้ทุกวินาที มีความเยือกเย็นในการจบสกอร์และสถิติยิงจุดโทษ 100%"
+            },
+            {
+                id: 10,
+                number: 7,
+                name: "Pedro Neto",
+                position: "FWD",
+                posLabel: "ปีกขวา / ปีกซ้าย (Winger)",
+                nationality: "โปรตุเกส (Portugal)",
+                age: "26 ปี",
+                joined: "สิงหาคม 2024",
+                apps: 44,
+                stat2Label: "ประตู (Goals)",
+                stat2Val: 9,
+                stat3Label: "แอสซิสต์ (Assists)",
+                stat3Val: 14,
+                bio: "ปีกความเร็วจัดทีมชาติโปรตุเกส มีการเลี้ยงบอลจี้เข้าหาแนวรับที่อันตราย สามารถเล่นได้ทั้งสองฝั่งและเปิดบอลให้กองหน้าเข้าฮอร์สได้อย่างแม่นยำ"
+            },
+            {
+                id: 11,
+                number: 15,
+                name: "Nicolas Jackson",
+                position: "FWD",
+                posLabel: "กองหน้าตัวเป้า (Striker)",
+                nationality: "เซเนกัล (Senegal)",
+                age: "25 ปี",
+                joined: "กรกฎาคม 2023",
+                apps: 72,
+                stat2Label: "ประตู (Goals)",
+                stat2Val: 29,
+                stat3Label: "แอสซิสต์ (Assists)",
+                stat3Val: 11,
+                bio: "กองหน้าจอมขยันที่มีความเร็วและการเคลื่อนที่หาช่องว่างหลังแนวรับได้อย่างยอดเยี่ยม ช่วยเชื่อมเกมรุกและเพรสซิ่งแดนบนตลอดทั้งเกม"
+            },
+            {
+                id: 12,
+                number: 18,
+                name: "Christopher Nkunku",
+                position: "FWD",
+                posLabel: "กองหน้าตัวต่ำ (Second Striker)",
+                nationality: "ฝรั่งเศส (France)",
+                age: "28 ปี",
+                joined: "กรกฎาคม 2023",
+                apps: 48,
+                stat2Label: "ประตู (Goals)",
+                stat2Val: 18,
+                stat3Label: "แอสซิสต์ (Assists)",
+                stat3Val: 6,
+                bio: "แนวรุกเทคนิคแพรวพราวทีมชาติฝรั่งเศส จบสกอร์เฉียบคมในกรอบเขตโทษ สามารถเล่นได้ทั้งตำแหน่งหน้าเป้า หน้าต่ำ และตัวรุกริมเส้น"
+            }
+        ];
+
+        // 2. Render Squad Grid Function
+        function renderSquad(filter = 'all') {
+            const grid = document.getElementById('squad-grid');
+            grid.innerHTML = '';
+
+            const filteredPlayers = filter === 'all'
+                ? squadData
+                : squadData.filter(player => player.position === filter);
+
+            filteredPlayers.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm cursor-pointer group flex flex-col justify-between';
+                card.onclick = () => openPlayerModal(player);
+
+                // Badge Color by Position
+                let posBadgeClass = 'bg-blue-50 text-chelsea-blue';
+                if (player.position === 'GK') posBadgeClass = 'bg-amber-50 text-amber-700';
+                if (player.position === 'FWD') posBadgeClass = 'bg-rose-50 text-rose-700';
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Top Jersey Banner -->
+                        <div class="bg-gradient-to-br from-chelsea-blue to-chelsea-navy p-6 relative overflow-hidden">
+                            <div class="pitch-pattern absolute inset-0 opacity-30"></div>
+                            <div class="flex items-start justify-between relative z-10">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/15 text-white backdrop-blur-sm">
+                                    ${player.position}
+                                </span>
+                                <span class="player-number font-display font-black text-5xl text-white/90 transition-all duration-300">
+                                    #${player.number}
+                                </span>
+                            </div>
+                            <!-- Stylized Player Avatar Circle -->
+                            <div class="w-20 h-20 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-3xl mt-4 relative z-10">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                        </div>
+
+                        <!-- Player Info -->
+                        <div class="p-6">
+                            <span class="inline-block px-2.5 py-0.5 rounded-md text-[11px] font-bold ${posBadgeClass} mb-2">
+                                ${player.posLabel}
+                            </span>
+                            <h3 class="text-xl font-extrabold text-chelsea-dark group-hover:text-chelsea-blue transition-colors">
+                                ${player.name}
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">${player.nationality}</p>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Action -->
+                    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-chelsea-blue group-hover:bg-chelsea-blue group-hover:text-white transition-colors">
+                        <span>ดูสถิติและข้อมูลเชิงลึก</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 3. Squad Filter Button Click Handler
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-chelsea-blue', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+                });
+                this.classList.add('active', 'bg-chelsea-blue', 'text-white', 'shadow-md');
+                this.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+
+                renderSquad(this.dataset.filter);
+            });
+        });
+
+        // 4. Modal Controllers
+        function openPlayerModal(player) {
+            document.getElementById('modal-player-number').textContent = player.number;
+            document.getElementById('modal-player-pos').textContent = player.posLabel;
+            document.getElementById('modal-player-name').textContent = player.name;
+            document.getElementById('modal-player-nation').textContent = `สัญชาติ: ${player.nationality}`;
+            document.getElementById('modal-stat-apps').textContent = player.apps;
+            document.getElementById('modal-stat-2-label').textContent = player.stat2Label;
+            document.getElementById('modal-stat-2-val').textContent = player.stat2Val;
+            document.getElementById('modal-stat-3-label').textContent = player.stat3Label;
+            document.getElementById('modal-stat-3-val').textContent = player.stat3Val;
+            document.getElementById('modal-player-bio').textContent = player.bio;
+            document.getElementById('modal-player-age').textContent = player.age;
+            document.getElementById('modal-player-joined').textContent = player.joined;
+
+            openModal('player-modal');
+        }
+
+        function openStadiumTourModal() {
+            openModal('stadium-modal');
+        }
+
+        function openFanClubModal() {
+            openModal('fanclub-modal');
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnBackdrop(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+
+        // 5. Match Tabs Switcher (Upcoming vs Results)
+        function switchMatchTab(tab) {
+            const btnUpcoming = document.getElementById('tab-upcoming');
+            const btnResults = document.getElementById('tab-results');
+            const panelUpcoming = document.getElementById('panel-upcoming');
+            const panelResults = document.getElementById('panel-results');
+
+            if (tab === 'upcoming') {
+                btnUpcoming.classList.add('bg-chelsea-blue', 'text-white', 'shadow-md');
+                btnUpcoming.classList.remove('text-slate-600');
+                btnResults.classList.remove('bg-chelsea-blue', 'text-white', 'shadow-md');
+                btnResults.classList.add('text-slate-600');
+
+                panelUpcoming.classList.remove('hidden');
+                panelResults.classList.add('hidden');
+            } else {
+                btnResults.classList.add('bg-chelsea-blue', 'text-white', 'shadow-md');
+                btnResults.classList.remove('text-slate-600');
+                btnUpcoming.classList.remove('bg-chelsea-blue', 'text-white', 'shadow-md');
+                btnUpcoming.classList.add('text-slate-600');
+
+                panelResults.classList.remove('hidden');
+                panelUpcoming.classList.add('hidden');
+            }
+        }
+
+        // 6. Live Match Countdown Timer
+        function startCountdown() {
+            // Set target 2 days, 14 hours, 35 mins from page load for lively demo
+            let totalSeconds = (2 * 86400) + (14 * 3600) + (35 * 60) + 48;
+
+            setInterval(() => {
+                if (totalSeconds <= 0) return;
+                totalSeconds--;
+
+                const days = Math.floor(totalSeconds / 86400);
+                const hours = Math.floor((totalSeconds % 86400) / 3600);
+                const mins = Math.floor((totalSeconds % 3600) / 60);
+                const secs = totalSeconds % 60;
+
+                document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+                document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+            }, 1000);
+        }
+
+        // 7. Toast Notification & Form Handlers
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        function openReminderToast(matchName) {
+            showToast(`ตั้งค่าการแจ้งเตือนแมตช์ ${matchName} เรียบร้อยแล้ว!`);
+        }
+
+        function handleFanClubSubmit(e) {
+            e.preventDefault();
+            closeModal('fanclub-modal');
+            e.target.reset();
+            showToast('ยินดีต้อนรับสู่ครอบครัว True Blue Thailand! ลงทะเบียนสำเร็จ');
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('ขอบคุณที่ติดตามข่าวสารของสโมสรเชลซี!');
+        }
+
+        // 8. Navigation Scroll Spy & Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Active Section Highlighting
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 140;
+
+            sections.forEach(sec => {
+                const top = sec.offsetTop;
+                const height = sec.offsetHeight;
+                const id = sec.getAttribute('id');
+
+                if (scrollPos >= top && scrollPos < top + height) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active', 'text-chelsea-gold');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active', 'text-chelsea-gold');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Keyboard ESC to close modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal('player-modal');
+                closeModal('stadium-modal');
+                closeModal('fanclub-modal');
+            }
+        });
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSquad('all');
+            startCountdown();
+        });
+    </script>
 </body>
 </html>
